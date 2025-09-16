@@ -4,6 +4,7 @@
  */
 package Servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -49,7 +50,7 @@ public class AddServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thiếu tham số action");
                 return;
             }
-            
+
             //handle action
             switch (action) {
                 //login
@@ -60,7 +61,8 @@ public class AddServlet extends HttpServlet {
                 case "register" -> {
                     handleRegister(request, response);
                 }
-                default -> throw new AssertionError();
+                default ->
+                    throw new AssertionError();
             }
 
             out.println("</body>");
@@ -69,21 +71,23 @@ public class AddServlet extends HttpServlet {
     }
 
     //function handle login form
-    private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        PrintWriter out = response.getWriter();
-        out.println(username);
-        out.println(password);
+
+        if(username.equals("admin") && password.equals("123456")){
+            request.setAttribute("name", "Do The Hung");
+            RequestDispatcher rd = request.getRequestDispatcher("NotificationServlet");
+            rd.forward(request, response);
+        }
     }
-    
+
     //function handle register form
     private void handleRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        
+
         PrintWriter out = response.getWriter();
         out.println(username);
         out.println(email);
