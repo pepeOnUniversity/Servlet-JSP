@@ -26,7 +26,7 @@ public class NotificationServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -39,8 +39,7 @@ public class NotificationServlet extends HttpServlet {
             out.println("<body>");
            
             out.println("<p>Notification Page</p>");
-            out.println("<p>This is admin page</p>");
-            out.println("<h2>Hello, " + request.getAttribute("name") + "</h2>");
+
             out.println("</body>");
             out.println("</html>");
         }
