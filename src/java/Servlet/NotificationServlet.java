@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -39,8 +40,12 @@ public class NotificationServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<p>Notification Page</p>");
-            //get value by URL
-            out.println("<h2>Hello, " + request.getParameter("name") + "</h2>");
+            //create session
+            HttpSession session = request.getSession();
+            //get attribuet
+            String name = (String) session.getAttribute("name");
+
+            out.println("<h2>Value " + name + " got by Session</h2>");
             out.println("</body>");
             out.println("</html>");
         }
