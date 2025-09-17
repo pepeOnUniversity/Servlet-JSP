@@ -75,7 +75,16 @@ public class AddServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        response.sendRedirect("NotificationServlet");
+        //check login
+        if (username.equals("admin") && password.equals("123456")) {
+            String name = "Admin Do The Hung";
+            //redirect to /DemoApp/NotificationServlet?name=Admin Do The Hung (pass value by URL)
+            response.sendRedirect("NotificationServlet?name=" + name);
+        } else {
+            //url /DemoApp/AddServlet?action=login&username=...&password=...
+            PrintWriter out = response.getWriter();
+            out.println("<h2>Hello, Client</h2>");
+        }
     }
 
     //function handle register form
