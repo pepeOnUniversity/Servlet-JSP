@@ -31,7 +31,7 @@ public class AddServlet extends HttpServlet {
     //this function override doPost method so in form, if its method is POST -> run this function
     //while, if we must not set name for function (doPost, doGet), we must be keep the code auto generate by servlet
     //because, in their doPost, doGet, they have exist function: processRequest so code can be run
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -75,11 +75,7 @@ public class AddServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if(username.equals("admin") && password.equals("123456")){
-            request.setAttribute("name", "Do The Hung");
-            RequestDispatcher rd = request.getRequestDispatcher("NotificationServlet");
-            rd.forward(request, response);
-        }
+        response.sendRedirect("NotificationServlet");
     }
 
     //function handle register form
