@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -64,7 +65,7 @@ public class AddServlet extends HttpServlet {
                 default ->
                     throw new AssertionError();
             }
-
+            
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,12 +77,17 @@ public class AddServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         //check login
-        if (username.equals("admin") && password.equals("123456")) {
+        if (username.equals("admin") && password.equals("1")) {
             String name = "Admin Do The Hung";
-            //redirect to /DemoApp/NotificationServlet?name=Admin Do The Hung (pass value by URL)
-            response.sendRedirect("NotificationServlet?name=" + name);
+
+            //create session
+            HttpSession session = request.getSession();
+            //set attribute for session
+            session.setAttribute("name", name);
+            //redirect: DemoApp/NotificationServlet
+            response.sendRedirect("NotificationServlet");
         } else {
-            //url /DemoApp/AddServlet?action=login&username=...&password=...
+            //url: /DemoApp/AddServlet?action=login&username=...&password=...
             PrintWriter out = response.getWriter();
             out.println("<h2>Hello, Client</h2>");
         }
@@ -92,11 +98,11 @@ public class AddServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
+        
         PrintWriter out = response.getWriter();
         out.println(username);
         out.println(email);
         out.println(password);
     }
-
+    
 }
