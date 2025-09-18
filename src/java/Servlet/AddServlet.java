@@ -4,14 +4,13 @@
  */
 package Servlet;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -32,77 +31,54 @@ public class AddServlet extends HttpServlet {
     //this function override doPost method so in form, if its method is POST -> run this function
     //while, if we must not set name for function (doPost, doGet), we must be keep the code auto generate by servlet
     //because, in their doPost, doGet, they have exist function: processRequest so code can be run
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            //get action
-            String action = request.getParameter("action");
-            //check action null or ""
-            if (action == null || action.equals("")) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thiếu tham số action");
-                return;
-            }
+        //get action
+        String action = request.getParameter("action");
+        //check action null or ""
+        if (action == null || action.equals("")) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thiếu tham số action");
+            return;
+        }
 
-            //handle action
-            switch (action) {
-                //login
-                case "login" -> {
-                    handleLogin(request, response);
-                }
-                //register
-                case "register" -> {
-                    handleRegister(request, response);
-                }
-                default ->
-                    throw new AssertionError();
+        //handle action
+        switch (action) {
+            //login
+            case "login" -> {
+                handleLogin(request, response);
             }
-            
-            out.println("</body>");
-            out.println("</html>");
+            //register
+            case "register" -> {
+                handleRegister(request, response);
+            }
+            default ->
+                throw new AssertionError();
         }
     }
 
-    //function handle login form
+//    function handle login form
     private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         //check login
         if (username.equals("admin") && password.equals("1")) {
-            String name = "Admin Do The Hung";
-
-            //create session
-            HttpSession session = request.getSession();
-            //set attribute for session
-            session.setAttribute("name", name);
-            //redirect: DemoApp/NotificationServlet
+            String name = "Admin_Do_The_Hung";
+            //create cookie
+            Cookie cookie = new Cookie("name", name);
+            //set cookie path to root
+            //reponse for client
+            response.addCookie(cookie);
+            //redirect: DemoApp/NotificationServlet?
             response.sendRedirect("NotificationServlet");
         } else {
-            //url: /DemoApp/AddServlet?action=login&username=...&password=...
-            PrintWriter out = response.getWriter();
-            out.println("<h2>Hello, Client</h2>");
         }
     }
 
+
+
     //function handle register form
     private void handleRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        PrintWriter out = response.getWriter();
-        out.println(username);
-        out.println(email);
-        out.println(password);
     }
-    
+
 }
