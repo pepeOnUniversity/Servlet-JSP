@@ -7,10 +7,10 @@ package Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -39,13 +39,34 @@ public class NotificationServlet extends HttpServlet {
             out.println("<title>Servlet NotificationServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<p>Notification Page</p>");
-            //create session
-            HttpSession session = request.getSession();
-            //get attribuet
-            String name = (String) session.getAttribute("name");
-
-            out.println("<h2>Value " + name + " got by Session</h2>");
+            out.println("<h1>Notification Page</h1>");
+            out.println("<p>Chào mừng bạn đến với trang thông báo!</p>");
+            
+            //get cookies
+            Cookie[] cookies = request.getCookies();
+            String name = "";
+            
+            //check cookies
+            if (cookies != null) {
+                //check for name cookie
+                for(Cookie c : cookies){
+                    if(c.getName().equals("name")){
+                        name = c.getValue();
+                        break;
+                    }
+                }
+            }
+            
+            //display result
+            if (!name.isEmpty()) {
+                // Replace underscores with spaces for display
+                String displayName = name.replace("_", " ");
+                out.println("<h2>Xin chào: " + displayName + "</h2>");
+                out.println("<p>Bạn đã đăng nhập thành công!</p>");
+            } else {
+                out.println("<h2>Không tìm thấy thông tin đăng nhập</h2>");
+                out.println("<p>Vui lòng <a href='index.html'>đăng nhập</a> trước.</p>");
+            }
             out.println("</body>");
             out.println("</html>");
         }
