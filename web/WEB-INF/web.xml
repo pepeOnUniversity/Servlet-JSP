@@ -7,19 +7,44 @@
         <!--file excute-->
         <servlet-class>Servlet.AddServlet</servlet-class>
     </servlet>
-    <!--mapping url-->
+    
     <servlet>
         <servlet-name>NotificationServlet</servlet-name>
         <servlet-class>Servlet.NotificationServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>ContextAndConfigServlet</servlet-name>
+        <servlet-class>Servlet.ContextAndConfigServlet</servlet-class>
+
+        
+        <init-param>
+            <param-name>applicationName</param-name>
+            <param-value>My Application Name In Scope</param-value>
+        </init-param>
+    </servlet>
+    
+    <!--mapping url-->
     <servlet-mapping>
         <!--must be the same name with above servlet-name-->
         <servlet-name>AddServlet</servlet-name>
         <!--url perform-->
         <url-pattern>/AddServlet</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>NotificationServlet</servlet-name>
         <url-pattern>/NotificationServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ContextAndConfigServlet</servlet-name>
+        <url-pattern>/ContextAndConfigServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!--context param-->
+    <context-param>
+        <param-name>applicationName</param-name>
+        <param-value>My Application Name In All Web</param-value>
+    </context-param>
 </web-app>
