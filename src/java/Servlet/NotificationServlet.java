@@ -42,6 +42,10 @@ public class NotificationServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1 style='color:red'>Hi, This is Notification Servlet Page</h2>");
+            
+            String nameAdmin = request.getParameter("name");
+            
+            out.println("<h3>Hi, " +  nameAdmin + "</h3>");
             out.println("</body>");
             out.println("</html>");
         }
