@@ -4,7 +4,6 @@
  */
 package Servlet;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.PrintWriter;
 
 /**
  *
@@ -69,8 +67,10 @@ public class AddServlet extends HttpServlet {
         if (username.equals("admin") && password.equals("1")) {
             String name = "Admin_Do_The_Hung";
 
-            HttpSession session = request.getSession();
-            session.setAttribute("name", name);
+            //using cookie
+            Cookie cookie = new Cookie("name", name);
+            //response cookie for client
+            response.addCookie(cookie);
             //send Redirect to /NotificationServlet ==> URL: DemoApp/NotificationServlet
             //client request -> AddServlet -> server said: "go to NotificationServlet"
             //-> client request -> NotificationServlet
