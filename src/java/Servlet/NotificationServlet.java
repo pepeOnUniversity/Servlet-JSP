@@ -41,7 +41,13 @@ public class NotificationServlet extends HttpServlet {
             out.println("<title>Servlet NotificationServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h2>Hi, This is Notification Servlet Page</h2>");
+            out.println("<h1 style='color:red'>Hi, This is Notification Servlet Page</h2>");
+            
+            //get name
+            String nameAdmin = (String)request.getAttribute("name");
+            
+            out.println("<h3>Hi " + nameAdmin + "</h3>");
+            
             out.println("</body>");
             out.println("</html>");
         }
