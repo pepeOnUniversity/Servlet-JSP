@@ -3,8 +3,5 @@
     <!--declear servlet-->
     <!--mapping url-->
     <!--context param-->
-    <context-param>
-        <param-name>applicationName</param-name>
-        <param-value>My Application Name In All Web</param-value>
-    </context-param>
+
 </web-app>
