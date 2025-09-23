@@ -12,7 +12,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -43,12 +42,29 @@ public class NotificationServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1 style='color:red'>Hi, This is Notification Servlet Page</h2>");
-            
-            HttpSession session = request.getSession();
-            String nameAdmin = (String)session.getAttribute("name");
-            
+
+            //get array cookies value by cookie
+            Cookie cookies[] = request.getCookies();
+
+            //init variable
+            String nameAdmin = "";
+            //loop util true
+            for (Cookie c : cookies) {
+                if (c.getName().equals("name")) {
+                    nameAdmin = c.getValue();
+                    break;
+                }
+            }
+
+            //handle if
+            if (nameAdmin.equals("")) {
+                nameAdmin = "The first time Admin vist Page. Please register your name";
+                return;
+            }
+
+            //display
             nameAdmin = nameAdmin.replaceAll("_", " ");
-            out.println("<h3 style='color:blue'>Hi, " +  nameAdmin + "</h3>");
+            out.println("<h3 style='color:blue'>Hi, " + nameAdmin + "</h3>");
             out.println("</body>");
             out.println("</html>");
         }
