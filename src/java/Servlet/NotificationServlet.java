@@ -7,6 +7,7 @@ package Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
+@WebServlet("/NotificationServlet")
 public class NotificationServlet extends HttpServlet {
 
     /**
@@ -39,34 +41,13 @@ public class NotificationServlet extends HttpServlet {
             out.println("<title>Servlet NotificationServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Notification Page</h1>");
-            out.println("<p>Chào mừng bạn đến với trang thông báo!</p>");
+            out.println("<h1 style='color:red'>Hi, This is Notification Servlet Page</h2>");
             
-            //get cookies
-            Cookie[] cookies = request.getCookies();
-            String name = "";
+            //get name
+            String nameAdmin = (String)request.getAttribute("name");
             
-            //check cookies
-            if (cookies != null) {
-                //check for name cookie
-                for(Cookie c : cookies){
-                    if(c.getName().equals("name")){
-                        name = c.getValue();
-                        break;
-                    }
-                }
-            }
+            out.println("<h3>Hi " + nameAdmin + "</h3>");
             
-            //display result
-            if (!name.isEmpty()) {
-                // Replace underscores with spaces for display
-                String displayName = name.replace("_", " ");
-                out.println("<h2>Xin chào: " + displayName + "</h2>");
-                out.println("<p>Bạn đã đăng nhập thành công!</p>");
-            } else {
-                out.println("<h2>Không tìm thấy thông tin đăng nhập</h2>");
-                out.println("<p>Vui lòng <a href='index.html'>đăng nhập</a> trước.</p>");
-            }
             out.println("</body>");
             out.println("</html>");
         }

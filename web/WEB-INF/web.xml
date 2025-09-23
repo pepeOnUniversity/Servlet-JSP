@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <!--declear servlet-->
-    <servlet>
-        <servlet-name>ContextAndConfigServlet</servlet-name>
-        <servlet-class>Servlet.ContextAndConfigServlet</servlet-class>
-
-        <init-param>
-            <param-name>applicationName</param-name>
-            <param-value>My Application Name In Scope</param-value>
-        </init-param>
-    </servlet>
-    
     <!--mapping url-->
-    <servlet-mapping>
-        <servlet-name>ContextAndConfigServlet</servlet-name>
-        <url-pattern>/ContextAndConfigServlet</url-pattern>
-    </servlet-mapping>
-    
     <!--context param-->
-    <context-param>
-        <param-name>applicationName</param-name>
-        <param-value>My Application Name In All Web</param-value>
-    </context-param>
+
 </web-app>
