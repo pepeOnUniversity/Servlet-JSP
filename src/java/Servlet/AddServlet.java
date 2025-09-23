@@ -67,13 +67,7 @@ public class AddServlet extends HttpServlet {
         //check login
         if (username.equals("admin") && password.equals("1")) {
             String name = "Admin Do The Hung";
-            
-            //set name for request
-            request.setAttribute("name", name);
-            //create req dispatcher
-            RequestDispatcher rd = request.getRequestDispatcher("NotificationServlet");
-            //change req in server-side ==> URL not change
-            rd.forward(request, response);
+
         } else {
         }
     }
