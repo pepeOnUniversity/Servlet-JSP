@@ -12,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -43,9 +44,11 @@ public class NotificationServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1 style='color:red'>Hi, This is Notification Servlet Page</h2>");
             
-            String nameAdmin = request.getParameter("name");
+            HttpSession session = request.getSession();
+            String nameAdmin = (String)session.getAttribute("name");
             
-            out.println("<h3>Hi, " +  nameAdmin + "</h3>");
+            nameAdmin = nameAdmin.replaceAll("_", " ");
+            out.println("<h3 style='color:blue'>Hi, " +  nameAdmin + "</h3>");
             out.println("</body>");
             out.println("</html>");
         }
