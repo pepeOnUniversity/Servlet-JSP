@@ -12,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
@@ -66,13 +67,14 @@ public class AddServlet extends HttpServlet {
 
         //check login
         if (username.equals("admin") && password.equals("1")) {
-            String name = "Admin Do The Hung";
+            String name = "Admin_Do_The_Hung";
 
-            
+            HttpSession session = request.getSession();
+            session.setAttribute("name", name);
             //send Redirect to /NotificationServlet ==> URL: DemoApp/NotificationServlet
             //client request -> AddServlet -> server said: "go to NotificationServlet"
             //-> client request -> NotificationServlet
-            response.sendRedirect("NotificationServlet?name=" + name);
+            response.sendRedirect("NotificationServlet");
         } else {
         }
     }
