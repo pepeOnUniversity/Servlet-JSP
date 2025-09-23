@@ -11,12 +11,12 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author ADMIN
  */
-
 @WebServlet("/AddServlet")
 public class AddServlet extends HttpServlet {
 
@@ -66,18 +66,18 @@ public class AddServlet extends HttpServlet {
         //check login
         if (username.equals("admin") && password.equals("1")) {
             String name = "Admin_Do_The_Hung";
-            //create cookie
+
+            //using cookie
             Cookie cookie = new Cookie("name", name);
-            //set cookie path to root
-            //reponse for client
+            //response cookie for client
             response.addCookie(cookie);
-            //redirect: DemoApp/NotificationServlet?
+            //send Redirect to /NotificationServlet ==> URL: DemoApp/NotificationServlet
+            //client request -> AddServlet -> server said: "go to NotificationServlet"
+            //-> client request -> NotificationServlet
             response.sendRedirect("NotificationServlet");
         } else {
         }
     }
-
-
 
     //function handle register form
     private void handleRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
