@@ -68,6 +68,10 @@ public class AddServlet extends HttpServlet {
         if (username.equals("admin") && password.equals("1")) {
             String name = "Admin Do The Hung";
 
+            //send Redirect to /NotificationServlet ==> URL: DemoApp/NotificationServlet
+            //client request -> AddServlet -> server said: "go to NotificationServlet"
+            //-> client request -> NotificationServlet
+            response.sendRedirect("NotificationServlet");
         } else {
         }
     }
