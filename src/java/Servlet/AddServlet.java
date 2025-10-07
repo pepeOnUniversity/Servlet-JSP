@@ -4,10 +4,10 @@
  */
 package Servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-
 @WebServlet("/AddServlet")
 public class AddServlet extends HttpServlet {
 
@@ -65,19 +64,17 @@ public class AddServlet extends HttpServlet {
 
         //check login
         if (username.equals("admin") && password.equals("1")) {
-            String name = "Admin_Do_The_Hung";
-            //create cookie
-            Cookie cookie = new Cookie("name", name);
-            //set cookie path to root
-            //reponse for client
-            response.addCookie(cookie);
-            //redirect: DemoApp/NotificationServlet?
-            response.sendRedirect("NotificationServlet");
+            String name = "Admin Do The Hung";
+            
+            //set name for request
+            request.setAttribute("name", name);
+            //create req dispatcher
+            RequestDispatcher rd = request.getRequestDispatcher("NotificationServlet");
+            //change req in server-side ==> URL not change, but VIEW is notification servlet
+            rd.forward(request, response);
         } else {
         }
     }
-
-
 
     //function handle register form
     private void handleRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
