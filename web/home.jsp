@@ -4,7 +4,8 @@
     Author     : ADMIN
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!--link to error.jsp-->
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,14 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
+<!--        url: http://localhost:9999/DemoApp/home.jsp 
+        but display is file erorr.jsp-->
         <%
-            try{
-                        int number = 9/0;
-
-            }
-            catch(Exception e){
-                out.println(e.getMessage());
-            }
+            int number = 10/0;
         %>
     </body>
 </html>
