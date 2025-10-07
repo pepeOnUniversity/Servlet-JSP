@@ -8,11 +8,9 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 /**
  *
@@ -72,7 +70,7 @@ public class AddServlet extends HttpServlet {
             request.setAttribute("name", name);
             //create req dispatcher
             RequestDispatcher rd = request.getRequestDispatcher("NotificationServlet");
-            //change req in server-side ==> URL not change
+            //change req in server-side ==> URL not change, but VIEW is notification servlet
             rd.forward(request, response);
         } else {
         }
