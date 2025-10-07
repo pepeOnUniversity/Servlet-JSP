@@ -4,7 +4,8 @@
     Author     : ADMIN
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<!--add attribute isErrorPage="true" -> enable variable exception-->
+<%@page contentType="text/html" pageEncoding="UTF-8" isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,5 +14,18 @@
     </head>
     <body>
         <h2>This is content in file error.jsp</h2>
+        <!--use variable exception-->
+        <p>
+        <%= exception %>
+        <br>
+        <br>
+        <%= exception.getMessage()%>
+        </p>
+        
+        <style>
+            p {
+                color:red;
+            }
+        </style>
     </body>
 </html>
