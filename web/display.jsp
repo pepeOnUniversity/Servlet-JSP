@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- taglib -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-
-        <h2><c:out value="Hello, ${name}" /></h2>
+        <!-- display name of object -->
+        <h1><c:out value="Hello, ${student}"/></h1>
     </body>
 </html>
