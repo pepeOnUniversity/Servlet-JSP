@@ -32,8 +32,9 @@ public class DemoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String name = "Do The Hung";
-        request.setAttribute("name", name);
+        //create 1 object
+        Student student = new Student(1, "Do The Hung");
+        request.setAttribute("student", student);
         RequestDispatcher rd = request.getRequestDispatcher("display.jsp");
         rd.forward(request, response);
     }
