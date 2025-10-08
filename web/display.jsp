@@ -14,7 +14,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <!-- display name of object -->
-        <h1><c:out value="Hello, ${student}"/></h1>
+        <!-- begin & and is optional -->
+        <c:forEach var="student" items="${listStudents}" begin="0" end="1">
+            <h3>${student}</h3>
+        </c:forEach>
     </body>
 </html>
