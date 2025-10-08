@@ -11,6 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,9 +34,18 @@ public class DemoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        //create 1 object
-        Student student = new Student(1, "Do The Hung");
-        request.setAttribute("student", student);
+        //create List students
+        List<Student> listStudents = new ArrayList<>();
+        //create 1 list objects
+        Student student1 = new Student(1, "Do The Hung");
+        Student student2 = new Student(2, "Do Anh Thu");
+        Student student3 = new Student(3, "Nguyen Van A");
+        //add list student
+        listStudents.add(student1);
+        listStudents.add(student2);
+        listStudents.add(student3);
+        //set attribute
+        request.setAttribute("listStudents", listStudents);
         RequestDispatcher rd = request.getRequestDispatcher("display.jsp");
         rd.forward(request, response);
     }
