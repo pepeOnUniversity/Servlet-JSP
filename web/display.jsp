@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,16 +14,6 @@
     </head>
     <body>
 
-        <!--use JSP-->
-        <%
-            String name = request.getAttribute("name").toString();
-            out.println("Using JSP to get name:  " + name);
-        %>
-        <br> 
-        <br> 
-        <br> 
-        Using JTSL to get name: 
-        <!-- use JSTL -->
-        ${name}
+        <h2><c:out value="Hello, ${name}" /></h2>
     </body>
 </html>
